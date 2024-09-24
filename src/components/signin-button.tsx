@@ -15,7 +15,7 @@ export default function SigninButton() {
         await supabase.auth.signInWithOAuth({
           provider: "discord",
           options: {
-            redirectTo: "http://localhost:3000/auth/callback",
+            redirectTo: "https://heidiguild.vercel.app/auth/callback",
           },
         })
       }
