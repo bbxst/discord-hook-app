@@ -1,7 +1,6 @@
 import { Suspense } from "react";
 import { PersonStanding } from "lucide-react";
 
-import { createClient } from "@/supabase/server";
 import { Skeleton } from "@/components/ui/skeleton";
 import AddCharacter from "@/components/add-character";
 import CharacterCard from "@/components/character-card";
@@ -25,7 +24,7 @@ function CardSkeleton() {
 }
 
 async function CardContainer() {
-  const { data, success, message } = await getCharacters();
+  const { data } = await getCharacters();
 
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 px-6 gap-6">

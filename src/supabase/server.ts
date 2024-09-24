@@ -1,4 +1,5 @@
 import { cookies } from "next/headers";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { createServerClient, type CookieOptions } from "@supabase/ssr";
 
 import { Database } from "./database.types";

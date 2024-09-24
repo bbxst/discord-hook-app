@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { House, List, ListPlus, LogOut, PersonStanding } from "lucide-react";
+import { House, LogOut, PersonStanding } from "lucide-react";
 
 import { createClient } from "@/supabase/client";
 
