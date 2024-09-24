@@ -1,10 +1,9 @@
 "use client";
 
 import { z } from "zod";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
 import { UserRoundPlus } from "lucide-react";
-import { createClient } from "@/supabase/client";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { jobsList } from "@/lib/dn-classes";
@@ -36,9 +35,9 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { newJobNotify } from "@/app/actions/discord.action";
+import { addCharacter } from "@/app/actions/character.action";
 
 const formSchema = z.object({
-  user_id: z.string().uuid({ message: "รหัสประจำตัวไม่ถูกต้อง" }),
   name: z
     .string()
     .min(4, { message: "ขั้นต่ำ 4 ตัวอักษร" })
@@ -50,8 +49,6 @@ const formSchema = z.object({
 });
 
 export default function AddCharacter() {
-  const supabase = createClient();
-
   const { toast } = useToast();
 
   const [open, setOpen] = useState<boolean>(false);
@@ -64,29 +61,19 @@ export default function AddCharacter() {
     },
   });
 
-  const getUser = async () => {
-    const { data } = await supabase.auth.getUser();
-
-    form.setValue("user_id", data?.user?.id as string);
-  };
-
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const { error } = await supabase.from("characters").insert(values);
+    const { success, message } = await addCharacter(values.name, values.job);
 
     await newJobNotify(values.name, values.job);
 
     toast({
-      title: error ? "ไม่สำเร็จ" : "สำเร็จ",
-      variant: error ? "destructive" : "default",
+      title: message,
+      variant: success ? "default" : "destructive",
     });
 
     form.reset();
     setOpen(false);
   };
-
-  useEffect(() => {
-    getUser();
-  });
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -105,18 +92,6 @@ export default function AddCharacter() {
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <FormField
-              control={form.control}
-              name="user_id"
-              render={({ field }) => (
-                <FormItem hidden>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
             <FormField
               control={form.control}
               name="name"

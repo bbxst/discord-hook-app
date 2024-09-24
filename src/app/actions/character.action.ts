@@ -1,10 +1,9 @@
 "use server";
 
-import { Tables } from "@/supabase/database.types";
 import { createClient } from "@/supabase/server";
 import { revalidatePath } from "next/cache";
 
-export async function addCharacter(newChar: Tables<"characters">) {
+export async function addCharacter(name: string, job: string) {
   const supabase = createClient();
 
   const { data: auth, error: authError } = await supabase.auth.getUser();
@@ -13,7 +12,11 @@ export async function addCharacter(newChar: Tables<"characters">) {
     return { success: false, message: "ไม่พบบัญชีผู้ใช้งาน" };
   }
 
-  const { error } = await supabase.from("characters").insert(newChar);
+  const { error } = await supabase.from("characters").insert({
+    user_id: auth.user.id,
+    name: name,
+    job: job,
+  });
 
   if (error) {
     return { success: false, message: "เพิ่มตัวละครไม่สำเร็จ" };
