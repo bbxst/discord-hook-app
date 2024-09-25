@@ -14,7 +14,7 @@ export default async function Header() {
 
   const user = data.user;
 
-  console.log(user?.user_metadata);
+  // console.log(user?.user_metadata);
 
   return (
     <header className="bg-card">

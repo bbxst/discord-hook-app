@@ -27,7 +27,7 @@ async function CardContainer() {
   const { data } = await getCharacters();
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 px-6 gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 px-6 pb-6 gap-6">
       {data?.map((char) => (
         <CharacterCard
           key={char.id}
@@ -35,6 +35,9 @@ async function CardContainer() {
           name={char.name}
           job={char.job}
           user_id={char.user_id}
+          image={char.image}
+          message_id={char.message_id}
+          created_at={char.created_at}
         />
       ))}
     </div>

@@ -3,7 +3,7 @@
 import { z } from "zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { UserRoundPlus } from "lucide-react";
+import { UserRoundPlus, Loader2 } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { jobsList } from "@/lib/dn-classes";
@@ -46,12 +46,24 @@ const formSchema = z.object({
     .string()
     .min(4, { message: "ขั้นต่ำ 4 ตัวอักษร" })
     .max(20, { message: "สูงสุด 20 ตัวอักษร" }),
+  image: z
+    .instanceof(File)
+    .refine(
+      (file) => {
+        return file.size < 1 * 1024 * 1024;
+      },
+      { message: "ขนาดไฟล์ห้ามเกิน 1 MB" }
+    )
+    .refine((file) => {
+      return ["image/jpeg", "image/png"].includes(file.type);
+    }),
 });
 
 export default function AddCharacter() {
   const { toast } = useToast();
 
   const [open, setOpen] = useState<boolean>(false);
+  const [pending, setPending] = useState<boolean>(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -62,9 +74,18 @@ export default function AddCharacter() {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const { success, message } = await addCharacter(values.name, values.job);
+    setPending(true);
 
-    await newJobNotify(values.name, values.job);
+    const { messageId } = await newJobNotify(values.name, values.job);
+
+    const formData = new FormData();
+
+    formData.append("name", values.name);
+    formData.append("job", values.job);
+    formData.append("image", values.image);
+    formData.append("messageId", messageId);
+
+    const { success, message } = await addCharacter(formData);
 
     toast({
       title: message,
@@ -72,6 +93,7 @@ export default function AddCharacter() {
     });
 
     form.reset();
+    setPending(false);
     setOpen(false);
   };
 
@@ -132,7 +154,35 @@ export default function AddCharacter() {
                 </FormItem>
               )}
             />
-            <Button type="submit">บันทึก</Button>
+            <FormField
+              control={form.control}
+              name="image"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>เพิ่มรูป</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="file"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        field.onChange(file);
+                      }}
+                      onBlur={field.onBlur}
+                      ref={field.ref}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button disabled={pending} className="w-full" type="submit">
+              <Loader2
+                className={`${
+                  pending ? "block" : "hidden"
+                } w-4 h-4 mr-2 animate-spin`}
+              />
+              บันทึก
+            </Button>
           </form>
         </Form>
       </DialogContent>

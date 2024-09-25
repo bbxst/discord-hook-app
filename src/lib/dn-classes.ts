@@ -28,53 +28,53 @@ export const jobsList = [
 export function jobsEmoji(job: string) {
   switch (job) {
     case "Gladiator":
-      return "<:Gladiator:1285591779730522132>";
+      return "/job-icons/Gladiator-icon-new.webp";
     case "Windwalker":
-      return "<:Windwalker:1285592086472822825>";
+      return "/job-icons/Windwalker-icon-new.webp";
     case "Tempest":
-      return "<:Tempest:1285592062212964352>";
+      return "/job-icons/Tempest-icon-new.webp";
     case "SpiritDancer":
-      return "<:SpiritDancer:1285592023516184606>";
+      return "/job-icons/Spirit_Dancer_Icon.webp";
     case "Souleater":
-      return "<:Souleater:1285592005161910293>";
+      return "/job-icons/Souleater-icon.webp";
     case "Sniper":
-      return "<:Sniper:1285591980537155594>";
+      return "/job-icons/Souleater-icon.webp";
     case "Smasher":
-      return "<:Smasher:1285591957686714509>";
+      return "/job-icons/Smasher-icon-new.webp";
     case "Saleana":
-      return "<:Saleana:1285591939537698926>";
+      return "/job-icons/SaleanaLogo.webp";
     case "Saint":
-      return "<:Saint:1285591913336016896>";
+      return "/job-icons/Saint-icon-new.webp";
     case "Physician":
-      return "<:Physician:1285591888119988297>";
+      return "/job-icons/Physician-icon-new.webp";
     case "Moonlord":
-      return "<:Moonlord:1285591867890728960>";
+      return "/job-icons/Moonlord-icon-new.webp";
     case "Majesty":
-      return "<:Majesty:1285591847468793970>";
+      return "/job-icons/Majesty-icon-new.webp";
     case "Inquisitor":
-      return "<:Inquisitor:1285591824836071445>";
+      return "/job-icons/Inquisitor-icon-new.webp";
     case "Guardian":
-      return "<:Guardian:1285591803277344781>";
+      return "/job-icons/Guardian-icon-new.webp";
     case "Elestra":
-      return "<:Elestra:1285591757475807282>";
+      return "/job-icons/ElestraIcon.webp";
     case "Destroyer":
-      return "<:Destroyer:1285591709538975785>";
+      return "/job-icons/Destroyer-icon-new.webp";
     case "Darksummoner":
-      return "<:Darksummoner:1285591679503700053>";
+      return "/job-icons/Darksummoner-icon.webp";
     case "Crusader":
-      return "<:Crusader:1285591655528796272>";
+      return "/job-icons/Crusader-icon-new.webp";
     case "Bladedancer":
-      return "<:Bladedancer:1285591614181478461>";
+      return "/job-icons/Bladedancer-icon.webp";
     case "Artillery":
-      return "<:Artillery:1285591573068775486>";
+      return "/job-icons/Artillery-icon-new.webp";
     case "Adept":
-      return "<:Adept:1285591483344224276>";
+      return "/job-icons/Adept-icon-new.webp";
     case "GearMaster":
-      return "<:GearMaster:1285591328490520677>";
+      return "/job-icons/43px-Gear_Master_Icon.webp";
     case "ShootingStar":
-      return "<:ShootingStar:1285591253978972222>";
+      return "/job-icons/39px-Shooting_Star_Icon.webp";
     case "Barbarian":
-      return "<:Barbarian:1285591155484000423>";
+      return "/job-icons/Barbarian-icon-new.webp";
     default:
       break;
   }
