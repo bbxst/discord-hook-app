@@ -8,6 +8,11 @@ import Image from "next/image";
 export default function SigninButton() {
   const supabase = createClient();
 
+  const callbackUrl = {
+    dev: "http://localhost:3000/auth/callback",
+    prod: "https://heidiguild.vercel.app/auth/callback",
+  };
+
   return (
     <Button
       className="bg-[#5865F2] hover:bg-[#5865F2]/80"
@@ -15,7 +20,7 @@ export default function SigninButton() {
         await supabase.auth.signInWithOAuth({
           provider: "discord",
           options: {
-            redirectTo: "https://heidiguild.vercel.app/auth/callback",
+            redirectTo: callbackUrl.prod,
           },
         })
       }

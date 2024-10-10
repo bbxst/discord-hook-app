@@ -17,7 +17,7 @@ export default async function Header() {
   // console.log(user?.user_metadata);
 
   return (
-    <header className="bg-card">
+    <header className="bg-card border-b">
       <nav className="flex justify-between items-center h-24 px-6">
         <div className="flex items-center gap-3">
           <Image
@@ -31,9 +31,9 @@ export default async function Header() {
             <Link href="/" className="hover:text-muted-foreground">
               หน้าแรก
             </Link>
-            {/* <Link href="/parties" className="hover:text-muted-foreground">
+            <Link href="/myparties" className="hover:text-muted-foreground">
               ปาร์ตี้ของฉัน
-            </Link> */}
+            </Link>
             <Link href="/characters" className="hover:text-muted-foreground">
               ตัวละครของฉัน
             </Link>

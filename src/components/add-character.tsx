@@ -34,8 +34,8 @@ import {
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { useToast } from "@/hooks/use-toast";
-import { newJobNotify } from "@/app/actions/discord.action";
-import { addCharacter } from "@/app/actions/character.action";
+import { newJobNotify } from "@/actions/discord.action";
+import { addCharacter } from "@/actions/character.action";
 
 const formSchema = z.object({
   name: z

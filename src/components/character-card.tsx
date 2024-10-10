@@ -1,25 +1,14 @@
 "use client";
 
+import { FormEvent, useState } from "react";
 import { Clock, Loader2, UserRoundCog, X } from "lucide-react";
 
-import { Tables } from "@/supabase/database.types";
-import {
-  deleteCharacter,
-  updateCharImage,
-} from "@/app/actions/character.action";
+import { deleteCharacter, updateCharImage } from "@/actions/character.action";
+import { jobsEmoji } from "@/lib/dn-classes";
 import { useToast } from "@/hooks/use-toast";
+import { Tables } from "@/supabase/database.types";
+import { deleteNotifyMessage } from "@/actions/discord.action";
 
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "./ui/alert-dialog";
 import {
   Dialog,
   DialogContent,
@@ -35,12 +24,20 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "./ui/alert-dialog";
 import Image from "next/image";
-import { jobsEmoji } from "@/lib/dn-classes";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import { deleteNotifyMessage } from "@/app/actions/discord.action";
-import { FormEvent, useState } from "react";
 
 export default function CharacterCard({
   id,
@@ -175,11 +172,13 @@ export default function CharacterCard({
         <div>
           <Image
             priority
-            className="w-full h-full object-cover"
-            src={`${storageUrl}/${image}`}
-            alt="stats image"
-            width={300}
             height={0}
+            width={300}
+            alt="stats image"
+            placeholder="blur"
+            src={`${storageUrl}/${image}`}
+            blurDataURL={`${storageUrl}/${image}`}
+            className="w-full h-full object-cover"
           />
         </div>
       </CardContent>

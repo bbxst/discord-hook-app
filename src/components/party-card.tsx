@@ -12,7 +12,7 @@ export default function PartyCard() {
   const date = new Date("2024-08-24T22:00:00.000");
 
   return (
-    <Card>
+    <Card className="shrink-0">
       <CardHeader>
         <CardTitle>Sea Dragon Nest</CardTitle>
         <CardDescription>{date.toLocaleString()}</CardDescription>

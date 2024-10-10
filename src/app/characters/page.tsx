@@ -4,7 +4,7 @@ import { PersonStanding } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import AddCharacter from "@/components/add-character";
 import CharacterCard from "@/components/character-card";
-import { getCharacters } from "../actions/character.action";
+import { getCharacters } from "../../actions/character.action";
 
 function CardSkeleton() {
   return (

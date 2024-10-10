@@ -13,7 +13,8 @@ const prompt = Prompt({
 });
 
 export const metadata: Metadata = {
-  title: "Party Management",
+  title: "Heidi Guild",
+  description: "Party management app",
 };
 
 export default function RootLayout({
@@ -25,13 +26,14 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${prompt.className} antialiased`}>
         <Provider
+          enableSystem
           attribute="class"
           defaultTheme="dark"
           disableTransitionOnChange
         >
           <Header />
           {children}
-          <footer className="px-6 py-6 bg-card">
+          <footer className="px-6 py-6 border-t bg-card">
             <p className="text-sm text-muted-foreground">
               © 2024 Heidi Guild. All rights reserved.
             </p>
